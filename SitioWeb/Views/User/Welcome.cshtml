@@ -1,0 +1,45 @@
+﻿@model SitioWeb.ViewModels.WelcomeViewModel
+
+
+@{
+    ViewBag.Title = "Bienvenido";
+}
+
+<h2>Bienvenido</h2>
+
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rol.Descripcion)
+        </dd>
+    </dl>
+    <h5>Lista de permisos</h5>
+    <div class="row">
+        <ul class="list-group col-6">
+            @foreach (var item in Model.ListaPermisos)
+            {
+                <li class="list-group-item">@item.Descripcion</li>
+            }
+        </ul>
+        <p class="col-6" ">
+            @Html.ActionLink("Registrar Usuario", "Create", new { @class = "btn btn-info ml-1" })
+        </p>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,63 @@
+﻿@model ApplicationCore.ModelResponse.Usuario
+
+@{
+    ViewBag.Title = "Autenticar";
+}
+
+<h2>Autenticar</h2>
+
+@using (Html.BeginForm("Autenticar", "User"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.NombreUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NombreUsuario, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.NombreUsuario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContrasennaUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*Campo tipo password*@
+                @Html.PasswordFor(model => model.ContrasennaUsuario, new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.ContrasennaUsuario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Autenticar" class="btn btn-outline-success rounded" />
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            var operacion_completa = '@TempData["Completado"]'
+            if (operacion_completa != '')
+                alertify.success(operacion_completa);
+        });
+    </script>
+    <script>
+        $(function () {
+            var operacion_error = '@TempData["Error"]'
+            if (operacion_error != '')
+                alertify.error(operacion_error);
+        });
+    </script>
+    <script>
+        var onFailureResult = function (msg) {
+            alertify.error(msg);
+        };
+    </script>
+}

@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="ApplicativoWpf.MVVM.CustomControl.CustomRegistrarUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ApplicativoWpf.MVVM.CustomControl"
+             mc:Ignorable="d"
+             xmlns:viewmodel="clr-namespace:ApplicativoWpf.MVVM.ViewModel"
+             xmlns:validation="clr-namespace:ApplicativoWpf.Validation"
+             d:DataContext="{d:DesignInstance viewmodel:RegistroViewModel}"
+             Background="White"
+             MinHeight="450"
+             Height="450"
+             Width="200">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75" />
+            <RowDefinition Height="75" />
+            <RowDefinition Height="140" />
+            <RowDefinition Height="65" />
+            <RowDefinition Height="65" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Margin="10,20,10,0">
+
+            <Label Content="Nombre de usuario"
+                   Foreground="Black"
+                   FontWeight="SemiBold"
+                   VerticalAlignment="Center"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Margin="0,0,5,0" />
+            <TextBox  x:Name="NombreUsuarioTxt"
+                      HorizontalAlignment="Stretch"
+                      TextAlignment="Left"
+                      Padding="0,5">
+                <TextBox.Text>
+                    <Binding Path="Usuario.NombreUsuario"
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1"
+                    Margin="10,20,10,0">
+            <Label Content="Contraseña de usuario"
+                   Foreground="Black"
+                   FontWeight="SemiBold"
+                   VerticalAlignment="Center"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Margin="0,0,5,0" />
+            <TextBox  x:Name="ContrasennaTxt"
+                      HorizontalAlignment="Stretch"
+                      TextAlignment="Left"
+                      Padding="0,5">
+                <TextBox.Text>
+                    <Binding Path="Usuario.ContrasennaUsuario"
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2"
+                    Margin="10,20,10,0">
+            <Label Content="Rol de usuario"
+                   Foreground="Black"
+                   FontWeight="SemiBold"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Margin="0,0,5,0" />
+            <ComboBox x:Name="RolCbx"
+                      HorizontalAlignment="Stretch"
+                      IsEnabled="{Binding Path=IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}"
+                      ItemsSource="{Binding  ListRol}"
+                      DisplayMemberPath="Descripcion"
+                      SelectedValue="{Binding Usuario.Rol, Mode=TwoWay, Delay=1}">
+                <ComboBox.SelectedItem>
+                    <Binding Path="Usuario.Rol"
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+            </ComboBox>
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="3"
+                    Margin="10,10,10,0">
+            <Button x:Name="BtnRegistrar"
+                    Content="Registrar usuario"
+                    ToolTip="Registrar usuario"
+                    Background="#3b62c4"
+                    BorderBrush="#3b62c4"
+                    Foreground="White"
+                    Height="45"
+                    Click="BtnRegistrar_Click" />
+        </StackPanel>
+        <StackPanel Grid.Row="4"
+                    Margin="10,10,10,0">
+            <Button x:Name="BtnRegresar"
+                    Content="Regresar"
+                    ToolTip="Regresar"
+                    Background="Gray"
+                    BorderBrush="Gray"
+                    Foreground="White"
+                    Height="45"
+                    Click="BtnRegresar_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>
