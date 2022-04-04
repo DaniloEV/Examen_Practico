@@ -36,7 +36,7 @@ namespace ApplicativoWpf.MVVM.CustomControl
             {
                 RegistrarUsuario();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -57,7 +57,6 @@ namespace ApplicativoWpf.MVVM.CustomControl
             {
                 if (!ValidationForm())
                 {
-                    ;
                     if (RegistroViewModel.RegistrarUsuario() != null)
                     {
                         MessageBox.Show("Usuario guardado con éxito.", "Usuario guardado", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -98,7 +97,6 @@ namespace ApplicativoWpf.MVVM.CustomControl
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
