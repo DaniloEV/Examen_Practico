@@ -32,7 +32,8 @@ namespace SitioWeb.Controllers
                         welcomeViewModel.NombreUsuario = oUsuario.NombreUsuario;
                         welcomeViewModel.Rol = oUsuario.Rol;
                         welcomeViewModel.ListaPermisos = servicePermiso.ListaPermisosPorId((int)oUsuario.RolId);
-                        return View("Welcome", welcomeViewModel);
+                        TempData["WelcomeViewModel"] = welcomeViewModel;
+                        return View("Welcome",welcomeViewModel);
                     }
                     else
                     {
@@ -54,7 +55,10 @@ namespace SitioWeb.Controllers
 
         public ActionResult Welcome()
         {
-            return View();
+            WelcomeViewModel welcomeViewModel = new WelcomeViewModel();
+            welcomeViewModel = (WelcomeViewModel)TempData["WelcomeViewModel"];
+            TempData.Keep();
+            return View(welcomeViewModel);
         }
         public ActionResult Create()
         {

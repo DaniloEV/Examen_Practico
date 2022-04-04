@@ -55,10 +55,8 @@ namespace ApplicativoWpf.MVVM.CustomControl
         {
             try
             {
-
                 if (!ValidationForm())
                 {
-                    this.Cursor = Cursors.Wait;
                     ;
                     if (RegistroViewModel.RegistrarUsuario() != null)
                     {
